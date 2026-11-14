@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kali Fenix: catálogo oficial de ferramentas Kali Linux e acesso à estação Kali remota pelo navegador.">
+  <meta name="theme-color" content="#07111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Kali Fenix — Kali Linux no navegador</title>
+  <link rel="icon" href="assets/kali-fenix.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/kali-fenix.css">
+  <script defer src="js/kali-fenix.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Kali Fenix, início">
+        <span class="brand-mark" aria-hidden="true">KF</span>
+        <span class="brand-name">KALI <strong>FENIX</strong></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#estacao">Estação remota</a>
+        <a href="#implantacao">Implantação</a>
+      </nav>
+      <a class="header-cta" href="/.netlify/functions/kali-portal">Abrir Kali <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse-dot"></span> KALI LINUX / REMOTE WORKSTATION</div>
+          <h1>Seu Kali.<br><em>No navegador.</em></h1>
+          <p class="hero-description">Consulte o catálogo oficial do Kali Linux e acesse uma estação Kali remota pelo navegador. O computador local funciona como cliente; a execução das ferramentas acontece no servidor configurado.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#catalogo">Explorar ferramentas <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#estacao">Conhecer a estação</a>
+          </div>
+          <div class="hero-note"><span aria-hidden="true">✓</span> Sem instalar Kali no notebook local</div>
+        </div>
+        <aside class="hero-terminal" aria-label="Resumo da arquitetura Kali Fenix">
+          <div class="terminal-bar"><span class="terminal-lights"><i></i><i></i><i></i></span><span>KALI FENIX / SESSION</span><span class="terminal-live">REMOTE</span></div>
+          <div class="terminal-body">
+            <p class="terminal-muted">Kali Fenix workstation</p>
+            <p><span class="prompt">fenix@kali</span>:<span class="path">~</span>$ uname -s</p>
+            <p class="terminal-output">Linux</p>
+            <p><span class="prompt">fenix@kali</span>:<span class="path">~</span>$ echo $DESKTOP_SESSION</p>
+            <p class="terminal-output">xfce</p>
+            <p><span class="prompt">fenix@kali</span>:<span class="path">~</span>$ <span class="cursor"></span></p>
+          </div>
+          <div class="terminal-footer"><span>EXECUÇÃO REMOTA</span><span>CATÁLOGO OFICIAL</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="quick-facts" aria-label="Características">
+      <div class="container facts-grid">
+        <div><span class="fact-label">DISTRIBUIÇÃO</span><strong>Kali Rolling</strong><small>Atualização contínua</small></div>
+        <div><span class="fact-label">CATÁLOGO</span><strong>Fonte oficial</strong><small>Consulta dinâmica</small></div>
+        <div><span class="fact-label">ACESSO REMOTO</span><strong>HTML5</strong><small>Guacamole / navegador</small></div>
+      </div>
+    </section>
+
+    <section class="section catalog-section" id="catalogo">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">01 / KALI TOOLS</span><h2>Catálogo oficial.</h2></div>
+          <p>Pesquise ferramentas publicadas pelo projeto Kali Linux. Cada resultado abre a página oficial com descrição, pacotes e documentação.</p>
+        </div>
+        <div class="catalog-panel">
+          <div class="catalog-toolbar">
+            <label class="search-field" for="tool-search">
+              <span aria-hidden="true">⌕</span>
+              <input id="tool-search" type="search" placeholder="Pesquisar por ferramenta, pacote ou nome…" autocomplete="off">
+            </label>
+            <button class="button button-primary" id="catalog-refresh" type="button">Sincronizar catálogo ↻</button>
+          </div>
+          <div class="catalog-meta"><span id="catalog-status" role="status" aria-live="polite">Preparando consulta ao catálogo oficial…</span><strong id="catalog-count">— ferramentas</strong></div>
+          <div id="catalog-results" class="catalog-results" aria-live="polite"><div class="empty-state">Carregando ferramentas do Kali Linux…</div></div>
+          <div class="pagination">
+            <button class="button button-secondary button-small" id="page-prev" type="button" disabled>← Anterior</button>
+            <span id="page-label">Página 1</span>
+            <button class="button button-secondary button-small" id="page-next" type="button" disabled>Próxima →</button>
+          </div>
+          <p class="disclaimer">O catálogo é uma listagem documental. Ele não instala nem executa binários no navegador. Para utilizar uma ferramenta, ela precisa estar instalada na estação Kali remota.</p>
+          <p class="official-link"><a href="https://www.kali.org/tools/all-tools/" target="_blank" rel="noopener noreferrer">Abrir catálogo diretamente em kali.org ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section workstation-section" id="estacao">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">02 / REMOTE WORKSTATION</span><h2>Estação Kali remota.</h2></div>
+          <p>Use o desktop e o terminal reais de uma máquina Kali Rolling. A sessão é servida por uma infraestrutura externa; a Netlify mantém somente o portal e o redirecionamento.</p>
+        </div>
+        <div class="workstation-grid">
+          <article class="workstation-card">
+            <div class="status-line"><span class="status-indicator"></span><div><strong>Portal de acesso Kali</strong><small>Requer VPS/VM e Guacamole configurados</small></div></div>
+            <p>Quando a infraestrutura estiver pronta, entre no portal remoto para abrir sua sessão. O terminal e os programas são executados na VM, não no seu notebook.</p>
+            <div class="spec-list">
+              <div><span>Sistema</span><strong>Kali Linux Rolling</strong></div>
+              <div><span>Ambiente gráfico</span><strong>XFCE</strong></div>
+              <div><span>Terminal</span><strong>Bash / SSH</strong></div>
+              <div><span>Acesso web</span><strong>Apache Guacamole</strong></div>
+            </div>
+            <a class="button button-primary button-wide" href="/.netlify/functions/kali-portal">Abrir estação Kali no navegador ↗</a>
+            <p class="small-note">O link só abrirá uma sessão depois que <code>FENIX_KALI_PORTAL_URL</code> estiver configurada na Netlify.</p>
+          </article>
+          <article class="setup-card">
+            <span class="section-kicker">INFRAESTRUTURA NECESSÁRIA</span>
+            <h3>O que precisa existir no servidor.</h3>
+            <ol>
+              <li>Uma VM/VPS compatível com Kali Linux, com armazenamento e memória suficientes.</li>
+              <li>Kali Rolling instalado e atualizado, com os pacotes escolhidos para o trabalho.</li>
+              <li>XFCE, SSH e XRDP instalados na VM.</li>
+              <li>Apache Guacamole com autenticação individual, HTTPS e MFA.</li>
+              <li>Conexão privada entre Guacamole e VM, além de regras de rede administradas.</li>
+            </ol>
+            <div class="notice"><strong>Importante:</strong> Netlify não hospeda uma VM Linux. Este site não simula um terminal; ele encaminha para a estação real quando ela estiver implantada.</div>
+            <div class="doc-links">
+              <a href="https://www.kali.org/docs/general-use/metapackages/" target="_blank" rel="noopener noreferrer">Metapacotes oficiais Kali ↗</a>
+              <a href="https://guacamole.apache.org/doc/gug/" target="_blank" rel="noopener noreferrer">Documentação Apache Guacamole ↗</a>
+              <a href="FENIX-KALI-BROWSER-SETUP.md">Guia de implantação ↗</a>
+              <a href="services/kali-workstation/README.md">Instalador da estação ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section deployment-section" id="implantacao">
+      <div class="container deployment-inner">
+        <div><span class="section-kicker">03 / START HERE</span><h2>Coloque o Kali Fenix no ar.</h2><p>Publique esta pasta na Netlify com as duas funções incluídas. Depois configure a infraestrutura remota e conecte o portal.</p></div>
+        <div class="deployment-steps">
+          <div><span>01</span><p><strong>GitHub + Netlify</strong><small>Publique o site e as funções.</small></p></div>
+          <div><span>02</span><p><strong>VM Kali</strong><small>Instale o sistema e os pacotes necessários.</small></p></div>
+          <div><span>03</span><p><strong>Guacamole</strong><small>Configure o acesso remoto seguro.</small></p></div>
+          <div><span>04</span><p><strong>Variável Netlify</strong><small>Defina FENIX_KALI_PORTAL_URL e faça novo deploy.</small></p></div>
+        </div>
+        <a class="button button-secondary" href="FENIX-KALI-BROWSER-SETUP.md">Ler guia completo de implantação ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Catálogo oficial e estação Kali remota.</p><span>© <span id="current-year"></span> KALI FENIX</span></div>
+  </footer>
+</body>
+</html>
