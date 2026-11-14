@@ -22,8 +22,10 @@
       </a>
       <nav class="main-nav" aria-label="Navegação principal">
         <a href="#catalogo">Catálogo</a>
+        <a href="#inventario">Inventário</a>
+        <a href="#labs">Labs</a>
         <a href="#estacao">Estação remota</a>
-        <a href="#implantacao">Implantação</a>
+        <a href="fenix-shell.html">Fenix Shell</a>
       </nav>
       <a class="header-cta" href="/.netlify/functions/kali-portal">Abrir Kali <span aria-hidden="true">↗</span></a>
     </div>
@@ -39,6 +41,7 @@
           <div class="hero-actions">
             <a class="button button-primary" href="#catalogo">Explorar ferramentas <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="#estacao">Conhecer a estação</a>
+            <a class="button button-secondary" href="fenix-shell.html">Abrir Fenix Shell ↗</a>
           </div>
           <div class="hero-note"><span aria-hidden="true">✓</span> Sem instalar Kali no notebook local</div>
         </div>
@@ -75,9 +78,15 @@
           <div class="catalog-toolbar">
             <label class="search-field" for="tool-search">
               <span aria-hidden="true">⌕</span>
-              <input id="tool-search" type="search" placeholder="Pesquisar por ferramenta, pacote ou nome…" autocomplete="off">
+              <input id="tool-search" type="search" placeholder="Pesquisar por ferramenta, finalidade ou nome…" autocomplete="off">
             </label>
-            <button class="button button-primary" id="catalog-refresh" type="button">Sincronizar catálogo ↻</button>
+            <div class="catalog-actions">
+              <label class="filter-field" for="tool-category">
+                <span>Categoria</span>
+                <select id="tool-category"><option value="">Todas as categorias</option></select>
+              </label>
+              <button class="button button-primary" id="catalog-refresh" type="button">Sincronizar catálogo ↻</button>
+            </div>
           </div>
           <div class="catalog-meta"><span id="catalog-status" role="status" aria-live="polite">Preparando consulta ao catálogo oficial…</span><strong id="catalog-count">— ferramentas</strong></div>
           <div id="catalog-results" class="catalog-results" aria-live="polite"><div class="empty-state">Carregando ferramentas do Kali Linux…</div></div>
@@ -92,10 +101,70 @@
       </div>
     </section>
 
+    <section class="section inventory-section" id="inventario">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">02 / FENIX TOOL MANAGER</span><h2>Inventário da estação.</h2></div>
+          <p>Importe um inventário gerado em uma máquina Kali ou Debian para comparar pacotes instalados com o catálogo. O arquivo é processado localmente no navegador e não é enviado ao servidor.</p>
+        </div>
+        <div class="inventory-panel">
+          <div class="inventory-intro">
+            <div>
+              <strong>Como gerar o inventário no Kali</strong>
+              <p>Execute o comando abaixo no sistema que deseja conferir. Depois selecione o arquivo <code>fenix-inventory.tsv</code>.</p>
+            </div>
+            <div class="copy-command-row">
+              <code id="inventory-command">dpkg-query -W -f='${binary:Package}\t${Version}\n' &gt; fenix-inventory.tsv</code>
+              <button class="button button-secondary button-small" id="copy-inventory-command" type="button">Copiar comando</button>
+            </div>
+          </div>
+          <div class="inventory-controls">
+            <label class="file-field" for="inventory-file"><span>Selecionar inventário (.tsv ou .txt)</span><input id="inventory-file" type="file" accept=".tsv,.txt,.csv,text/plain,text/tab-separated-values"></label>
+            <button class="button button-secondary button-small" id="inventory-clear" type="button" disabled>Limpar inventário</button>
+          </div>
+          <div id="inventory-status" class="inventory-status" role="status" aria-live="polite">Nenhum inventário importado.</div>
+          <div id="inventory-summary" class="inventory-summary" aria-live="polite"></div>
+          <div id="inventory-results" class="inventory-results"><div class="empty-state">O inventário aparecerá aqui após a importação.</div></div>
+          <p class="disclaimer">A correspondência usa nomes de pacotes conhecidos. “Não localizado” não prova que a ferramenta esteja ausente: alguns programas usam nomes de pacotes diferentes ou não são distribuídos via APT. A consulta nunca instala nem executa ferramentas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section labs-section" id="labs">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">03 / FENIX LABS</span><h2>Laboratórios para praticar.</h2></div>
+          <p>Ambientes externos de treinamento. Cada plataforma tem suas próprias regras, limites e modalidades gratuitas; pratique apenas nos alvos disponibilizados pelo laboratório.</p>
+        </div>
+        <div class="labs-grid">
+          <article class="lab-card">
+            <span class="lab-tag">LINUX / RED TEAM</span><h3>TryHackMe</h3>
+            <p>Salas gratuitas de cibersegurança e AttackBox no navegador. No plano gratuito, o AttackBox tem limite diário de uma hora.</p>
+            <a href="https://tryhackme.com/free-rooms" target="_blank" rel="noopener noreferrer">Ver salas gratuitas ↗</a>
+          </article>
+          <article class="lab-card">
+            <span class="lab-tag">WEB SECURITY</span><h3>PortSwigger Academy</h3>
+            <p>Laboratórios interativos gratuitos sobre SQL injection, XSS, autenticação, controle de acesso, APIs e outras vulnerabilidades web.</p>
+            <a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">Abrir Web Security Academy ↗</a>
+          </article>
+          <article class="lab-card">
+            <span class="lab-tag">LINUX / TERMINAL</span><h3>OverTheWire Bandit</h3>
+            <p>Jogo de desafios para iniciantes aprenderem linha de comando, navegação, permissões, arquivos e SSH.</p>
+            <a href="https://overthewire.org/wargames/bandit/" target="_blank" rel="noopener noreferrer">Começar Bandit ↗</a>
+          </article>
+          <article class="lab-card">
+            <span class="lab-tag">WEB / OWASP TOP 10</span><h3>OWASP Juice Shop</h3>
+            <p>Aplicação intencionalmente vulnerável e open source para treinamento. Execute sua própria instância local ou privada; não use a demonstração pública como alvo de testes.</p>
+            <a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener noreferrer">Documentação e projeto ↗</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section workstation-section" id="estacao">
       <div class="container">
         <div class="section-heading">
-          <div><span class="section-kicker">02 / REMOTE WORKSTATION</span><h2>Estação Kali remota.</h2></div>
+          <div><span class="section-kicker">04 / REMOTE WORKSTATION</span><h2>Estação Kali remota.</h2></div>
           <p>Use o desktop e o terminal reais de uma máquina Kali Rolling. A sessão é servida por uma infraestrutura externa; a Netlify mantém somente o portal e o redirecionamento.</p>
         </div>
         <div class="workstation-grid">
@@ -109,6 +178,7 @@
               <div><span>Acesso web</span><strong>Apache Guacamole</strong></div>
             </div>
             <a class="button button-primary button-wide" href="/.netlify/functions/kali-portal">Abrir estação Kali no navegador ↗</a>
+            <a class="button button-secondary button-wide" href="fenix-shell.html">Abrir página Fenix Shell ↗</a>
             <p class="small-note">O link só abrirá uma sessão depois que <code>FENIX_KALI_PORTAL_URL</code> estiver configurada na Netlify.</p>
           </article>
           <article class="setup-card">
@@ -135,7 +205,7 @@
 
     <section class="section deployment-section" id="implantacao">
       <div class="container deployment-inner">
-        <div><span class="section-kicker">03 / START HERE</span><h2>Coloque o Kali Fenix no ar.</h2><p>Publique esta pasta na Netlify com as duas funções incluídas. Depois configure a infraestrutura remota e conecte o portal.</p></div>
+        <div><span class="section-kicker">05 / START HERE</span><h2>Coloque o Kali Fenix no ar.</h2><p>Publique esta pasta na Netlify com as duas funções incluídas. Depois configure a infraestrutura remota e conecte o portal.</p></div>
         <div class="deployment-steps">
           <div><span>01</span><p><strong>GitHub + Netlify</strong><small>Publique o site e as funções.</small></p></div>
           <div><span>02</span><p><strong>VM Kali</strong><small>Instale o sistema e os pacotes necessários.</small></p></div>
@@ -148,7 +218,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Catálogo oficial e estação Kali remota.</p><span>© <span id="current-year"></span> KALI FENIX</span></div>
+    <div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Catálogo oficial, inventário, laboratórios e Fenix Shell.</p><span>© <span id="current-year"></span> KALI FENIX</span></div>
   </footer>
 </body>
 </html>
