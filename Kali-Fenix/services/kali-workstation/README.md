@@ -41,3 +41,18 @@ Depois da instalação:
 3. Aplique permissões: diretório `.ssh` com `700` e `authorized_keys` com `600`, pertencentes ao usuário.
 4. No Guacamole, crie conexões RDP (3389) e SSH (22) para o IP privado da VM.
 5. Não exponha SSH/RDP diretamente à internet.
+
+
+## Verificações e manutenção
+
+O instalador verifica se o disco raiz possui pelo menos 60 GiB totais e
+45 GiB livres antes de iniciar. Recomenda-se pelo menos 8 GiB de RAM.
+
+Após a instalação, atualize os pacotes com:
+
+```bash
+sudo fenix-kali-update
+```
+
+Esse comando libera temporariamente a saída de rede para os repositórios,
+mantém a entrada bloqueada e restaura a política deny-outgoing ao terminar.

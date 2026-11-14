@@ -26,6 +26,34 @@ fi
 FENIX_ADMIN_USER="${FENIX_ADMIN_USER:-fenixops}"
 FENIX_TARGET_CIDRS="${FENIX_TARGET_CIDRS:-}"
 
+# KALI FENIX RESOURCE PREFLIGHT
+read -r ROOT_TOTAL_KB ROOT_FREE_KB < <(
+  df -Pk / | awk 'NR==2 {print $2, $4}'
+)
+
+MIN_ROOT_TOTAL_KB=$((60 * 1024 * 1024))
+MIN_ROOT_FREE_KB=$((45 * 1024 * 1024))
+
+if (( ROOT_TOTAL_KB < MIN_ROOT_TOTAL_KB || ROOT_FREE_KB < MIN_ROOT_FREE_KB )); then
+  printf 'Espaço insuficiente. Disco: %.1f GiB total, %.1f GiB livres. Requer 60 GiB totais e 45 GiB livres.\n' \
+    "$(awk -v n="$ROOT_TOTAL_KB" 'BEGIN {print n/1048576}')" \
+    "$(awk -v n="$ROOT_FREE_KB" 'BEGIN {print n/1048576}')" >&2
+  exit 1
+fi
+
+MEM_KB=$(awk '/MemTotal:/ {print $2}' /proc/meminfo)
+
+if (( MEM_KB < 8 * 1024 * 1024 )); then
+  echo "AVISO: menos de 8 GiB de RAM. Ferramentas pesadas podem ficar lentas." >&2
+fi
+
+ARCH=$(dpkg --print-architecture)
+echo "Arquitetura detectada: ${ARCH}"
+
+if [[ "$ARCH" != "amd64" ]]; then
+  echo "AVISO: arquitetura diferente de amd64. Alguns pacotes podem não estar disponíveis." >&2
+fi
+
 if ! [[ "$FENIX_ADMIN_USER" =~ ^[a-z_][a-z0-9_-]{0,30}$ ]]; then
   echo "FENIX_ADMIN_USER contém caracteres inválidos." >&2
   exit 1
@@ -67,17 +95,36 @@ if [[ "$answer" != "INSTALAR" ]]; then
 fi
 
 export DEBIAN_FRONTEND=noninteractive
+
+# Permit temporarily outgoing access for package repositories.
+FENIX_RESTORE_EGRESS=0
+
+if command -v ufw >/dev/null 2>&1 &&
+   ufw status 2>/dev/null | grep -q '^Status: active'; then
+  ufw default allow outgoing
+  FENIX_RESTORE_EGRESS=1
+fi
+
+restore_egress_on_exit() {
+  if [[ "$FENIX_RESTORE_EGRESS" == "1" ]]; then
+    ufw default deny outgoing >/dev/null || true
+  fi
+}
+
+trap restore_egress_on_exit EXIT
 apt-get update
 apt-get full-upgrade -y
 apt-get install -y --no-install-recommends \
   kali-linux-everything \
   kali-desktop-xfce \
   xrdp \
+  xorgxrdp \
   openssh-server \
   ufw \
   sudo \
   ca-certificates \
   dbus-x11
+apt-get clean
 
 if ! id "$FENIX_ADMIN_USER" >/dev/null 2>&1; then
   adduser --disabled-password --gecos "Fenix Red Team Administrator" "$FENIX_ADMIN_USER"
@@ -106,10 +153,12 @@ AllowAgentForwarding no
 AllowTcpForwarding no
 EOF_SSH
 
-systemctl enable ssh
-systemctl enable xrdp
+sshd -t
+systemctl enable ssh xrdp
 systemctl restart ssh
 systemctl restart xrdp
+systemctl is-active --quiet ssh
+systemctl is-active --quiet xrdp
 
 # The firewall is host-side, not a browser checkbox. It allows the Guacamole
 # host to reach SSH/RDP and allows outbound network traffic only to the
@@ -138,6 +187,40 @@ done
 ufw logging low
 ufw --force enable
 
+# Temporary maintenance command for Kali repository updates.
+cat > /usr/local/sbin/fenix-kali-update <<'EOF_UPDATE'
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+if [[ "${EUID}" -ne 0 ]]; then
+  exec sudo "$0" "$@"
+fi
+
+if ! command -v ufw >/dev/null 2>&1 ||
+   ! ufw status 2>/dev/null | grep -q '^Status: active'; then
+  echo "UFW precisa estar ativo." >&2
+  exit 1
+fi
+
+restore_egress() {
+  ufw default deny outgoing >/dev/null
+}
+
+trap restore_egress EXIT
+
+echo "Liberando temporariamente a saída para atualizar o Kali."
+echo "As conexões de entrada continuam bloqueadas."
+
+ufw default allow outgoing
+apt-get update
+apt-get full-upgrade -y
+apt-get clean
+
+echo "Atualização concluída. Política de saída deny restaurada."
+EOF_UPDATE
+
+chmod 0750 /usr/local/sbin/fenix-kali-update
+
 cat <<EOF_DONE
 
 Instalação concluída.
@@ -160,6 +243,9 @@ Conecte o Guacamole ao IP privado desta VM:
 
 CIDRs liberados para saída: ${FENIX_TARGET_CIDRS:-nenhum}
 DNS: ${FENIX_DNS_SERVERS}
+
+Para atualizar o Kali posteriormente, execute: sudo fenix-kali-update
+A saída será liberada temporariamente para os repositórios e depois bloqueada novamente.
 
 Para adicionar um novo escopo, a administração deve adicionar uma regra UFW
 'exact CIDR' e documentar o ativo e a janela de trabalho. Nenhuma IA participa
