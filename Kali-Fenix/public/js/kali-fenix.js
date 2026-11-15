@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = (selector, root = document) => root.querySelector(selector);
-  const state = { tools: [], page: 1, pageSize: 36, loaded: false, inventory: null };
+  const state = { tools: [], page: 1, pageSize: 36, loaded: false, inventory: null, inventoryFilename: '' };
   const search = $('#tool-search');
   const categorySelect = $('#tool-category');
   const results = $('#catalog-results');
@@ -149,14 +149,27 @@
     results.appendChild(grid);
   }
 
+  function buildLocalCatalog() {
+    // Fallback embarcado: o catálogo e o inventário continuam utilizáveis
+    // mesmo quando a função Netlify ou o site kali.org estiver indisponível.
+    const slugs = [...new Set(Object.values(GROUPS).flat())].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+    return slugs.map(slug => ({
+      name: slug.replace(/-/g, ' '),
+      slug,
+      url: `https://www.kali.org/tools/${encodeURIComponent(slug)}/`
+    }));
+  }
+
   async function loadCatalog() {
     if (!refresh) return;
     const previousText = refresh.textContent;
     refresh.disabled = true; refresh.textContent = 'Sincronizando…';
-    if (status) status.textContent = 'Consultando o catálogo oficial do Kali Linux…';
+    if (status) status.textContent = state.tools.length
+      ? 'Catálogo de referência carregado. Tentando atualizar a lista oficial…'
+      : 'Consultando o catálogo oficial do Kali Linux…';
     try {
       const controller = new AbortController();
-      const timer = window.setTimeout(() => controller.abort(), 16000);
+      const timer = window.setTimeout(() => controller.abort(), 12000);
       let response;
       try {
         response = await fetch('/.netlify/functions/kali-catalog', {
@@ -165,18 +178,30 @@
       } finally { window.clearTimeout(timer); }
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
-      if (!Array.isArray(data.tools) || data.tools.length === 0) throw new Error('O catálogo oficial não retornou ferramentas.');
-      state.tools = data.tools.filter(item => item && typeof item.name === 'string' && typeof item.slug === 'string' && typeof item.url === 'string');
+      const received = Array.isArray(data.tools) ? data.tools : [];
+      const valid = received.filter(item => item && typeof item.name === 'string' && typeof item.slug === 'string'
+        && /^[a-z0-9][a-z0-9-]*$/i.test(item.slug)
+        && typeof item.url === 'string'
+        && (() => { try { const u = new URL(item.url); return u.protocol === 'https:' && u.hostname === 'www.kali.org' && u.pathname.startsWith('/tools/'); } catch { return false; } })());
+      if (!valid.length) throw new Error('A fonte oficial não retornou ferramentas válidas.');
+      state.tools = valid;
       state.page = 1; state.loaded = true; populateCategories();
       const synced = data.syncedAt ? new Date(data.syncedAt) : null;
       if (status) status.textContent = synced && !Number.isNaN(synced.getTime())
-        ? `Catálogo sincronizado com kali.org em ${synced.toLocaleString('pt-BR')}.`
+        ? `Catálogo oficial sincronizado em ${synced.toLocaleString('pt-BR')}.`
         : 'Catálogo oficial sincronizado.';
       renderCatalog();
+      if (state.inventory) renderInventory(state.inventory, state.inventoryFilename || 'inventário importado');
     } catch (error) {
-      if (status) status.textContent = 'Não foi possível sincronizar o catálogo agora.';
-      showMessage(`${error.name === 'AbortError' ? 'A consulta excedeu o tempo limite.' : (error.message || 'Erro de conexão.')} Consulte kali.org/tools/all-tools/.`);
-      if (count) count.textContent = 'Catálogo indisponível';
+      // Não apagar os dados locais caso a função ou a origem oficial falhe.
+      if (!state.tools.length) {
+        state.tools = buildLocalCatalog();
+        state.loaded = true;
+        populateCategories();
+      }
+      if (status) status.textContent = `Catálogo de referência local: ${state.tools.length} ferramentas. Sincronização online indisponível; ${error.name === 'AbortError' ? 'tempo limite excedido' : (error.message || 'falha de conexão')}.`;
+      renderCatalog();
+      if (state.inventory) renderInventory(state.inventory, state.inventoryFilename || 'inventário importado');
     } finally { refresh.disabled = false; refresh.textContent = previousText; }
   }
 
@@ -275,12 +300,13 @@
       const text = await file.text();
       const packages = parseInventory(text);
       state.inventory = packages;
+      state.inventoryFilename = file.name;
       renderInventory(packages, file.name);
       if (clearInventory) clearInventory.disabled=false;
     } catch { $('#inventory-status').textContent='Não foi possível ler o arquivo.'; }
   });
   clearInventory?.addEventListener('click', () => {
-    state.inventory=null; if (fileInput) fileInput.value='';
+    state.inventory=null; state.inventoryFilename=''; if (fileInput) fileInput.value='';
     $('#inventory-status').textContent='Inventário removido da memória desta página.';
     $('#inventory-summary')?.replaceChildren();
     const box=$('#inventory-results'); if (box) { box.replaceChildren(); const empty=document.createElement('div'); empty.className='empty-state'; empty.textContent='O inventário aparecerá aqui após a importação.'; box.appendChild(empty); }
@@ -294,8 +320,12 @@
   next?.addEventListener('click', () => { state.page += 1; renderCatalog(); });
   const year = $('#current-year'); if (year) year.textContent = String(new Date().getFullYear());
 
-  // Remove service workers and caches from the retired FenixTools site.
-  if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(regs => Promise.all(regs.map(r => r.unregister()))).catch(() => {});
-  if ('caches' in window) caches.keys().then(keys => Promise.all(keys.filter(k => /arolax|fenix|fenixtools/i.test(k)).map(k => caches.delete(k)))).catch(() => {});
+  // Renderizar imediatamente: catálogo e inventário não podem depender da
+  // disponibilidade da função Netlify para exibir os dados de referência.
+  state.tools = buildLocalCatalog();
+  state.loaded = true;
+  populateCategories();
+  renderCatalog();
+  if (status) status.textContent = `Catálogo de referência local carregado: ${state.tools.length} ferramentas. Atualizando catálogo oficial…`;
   loadCatalog();
 })();

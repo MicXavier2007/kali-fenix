@@ -6,7 +6,7 @@ Motor local opcional para conectar o site Kali Fenix ao computador do próprio u
 
 - Escuta somente em `127.0.0.1:8765` (não abre uma porta pública na rede).
 - Exige um token aleatório individual, exibido no terminal ao iniciar.
-- Aceita chamadas apenas do domínio oficial `https://kalifenix.netlify.app` e de origens locais de desenvolvimento listadas no código.
+- Aceita chamadas apenas do domínio oficial `https://kalifenix.netlify.app` e de origens locais de desenvolvimento listadas no código. A resposta CORS inclui `Access-Control-Allow-Private-Network` somente para essas origens autorizadas.
 - Restringe arquivos a `~/KaliFenixWorkspace`.
 - Executa somente comandos permitidos, sem `shell=True`, pipes, redirecionamento, encadeamento ou execução arbitrária.
 - Aplica limite de tamanho de requisição, tempo de subprocessos e taxa de chamadas.
@@ -31,7 +31,7 @@ Também é possível executar diretamente `python3 fenix_local_engine.py`.
 
 ## Acesso à rede local no Chrome / Edge
 
-Como o site está hospedado em HTTPS e o motor fica em `127.0.0.1`, o navegador pode solicitar permissão para acesso à rede de loopback. O site verifica o estado `loopback-network` quando disponível e declara o destino como `loopback` na chamada HTTP. Autorize somente porque você iniciou o Fenix Local Engine e está acessando o domínio oficial. Se a permissão foi negada antes, reative o acesso à rede local nas configurações do site do navegador.
+Como o site está hospedado em HTTPS e o motor fica em `127.0.0.1`, o navegador pode solicitar permissão para acesso à rede de loopback. O motor responde à pré-verificação CORS de rede privada e autoriza somente as origens da lista permitida. Autorize o acesso somente porque você iniciou o Fenix Local Engine e está acessando o domínio oficial. Se a permissão foi negada antes, reative o acesso à rede local nas configurações do site do navegador.
 
 ## Comandos disponíveis
 

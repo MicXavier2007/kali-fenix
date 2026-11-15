@@ -124,6 +124,10 @@ class FenixHandler(BaseHTTPRequestHandler):
         self.send_header("Vary", "Origin")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Authorization, Content-Type")
+        # Chromium can send this preflight header when a public HTTPS page
+        # contacts a service bound to localhost. It is only granted to the
+        # explicit, trusted origin allowlist above.
+        self.send_header("Access-Control-Allow-Private-Network", "true")
         self.send_header("Access-Control-Max-Age", "300")
         return True
 

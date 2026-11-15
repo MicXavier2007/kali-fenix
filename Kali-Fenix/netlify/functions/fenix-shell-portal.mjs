@@ -11,10 +11,16 @@ const json = (statusCode, payload) => ({
 export async function handler(event) {
   if (event.httpMethod !== "GET") return json(405, { error: "Método não permitido." });
   const raw = process.env.FENIX_SHELL_PORTAL_URL;
-  if (!raw) return json(503, {
-    error: "Fenix Shell remoto ainda não configurado.",
-    instruction: "Defina FENIX_SHELL_PORTAL_URL com a URL HTTPS de um terminal ttyd protegido por autenticação forte, MFA e proxy reverso. Não exponha ttyd diretamente à internet."
-  });
+  if (!raw) return {
+    statusCode: 302,
+    headers: {
+      location: "/estacao-remota.html?origem=shell",
+      "cache-control": "no-store, max-age=0",
+      "referrer-policy": "no-referrer",
+      "x-content-type-options": "nosniff"
+    },
+    body: ""
+  };
   let portal;
   try { portal = new URL(raw); }
   catch { return json(500, { error: "FENIX_SHELL_PORTAL_URL não contém uma URL válida." }); }

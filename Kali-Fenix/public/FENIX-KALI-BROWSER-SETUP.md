@@ -26,7 +26,7 @@ Este guia descreve a infraestrutura necessária para disponibilizar uma estaçã
 3. Faça um novo deploy.
 4. Teste `/.netlify/functions/kali-portal`.
 
-Sem a variável, a função responde HTTP 503 e informa que a estação ainda não foi configurada. Isso é esperado enquanto não houver um servidor.
+Sem a variável, a função redireciona para `estacao-remota.html`, que explica que a estação não foi configurada e oferece links para Fenix Shell local, Fenix Linux e Python WebAssembly.
 
 ## Observação sobre custos
 

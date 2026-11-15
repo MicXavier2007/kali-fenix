@@ -36,4 +36,4 @@ Não exponha a porta ttyd diretamente à internet. Use HTTPS, proxy reverso, aut
 
 ## Netlify
 
-A função `/.netlify/functions/fenix-shell-portal` redireciona para o terminal remoto quando `FENIX_SHELL_PORTAL_URL` está configurada com uma URL HTTPS protegida. Sem essa variável, responde HTTP 503.
+A função `/.netlify/functions/fenix-shell-portal` redireciona para o terminal remoto quando `FENIX_SHELL_PORTAL_URL` está configurada com uma URL HTTPS protegida. Sem essa variável, redireciona para `public/estacao-remota.html`, que informa que não há VPS configurada e oferece os caminhos locais disponíveis.

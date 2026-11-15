@@ -15,10 +15,16 @@ export async function handler(event) {
 
   const raw = process.env.FENIX_KALI_PORTAL_URL;
   if (!raw) {
-    return json(503, {
-      error: "Estação Kali remota ainda não configurada.",
-      instruction: "Configure FENIX_KALI_PORTAL_URL com a URL HTTPS de um portal Apache Guacamole protegido por autenticação forte e MFA."
-    });
+    return {
+      statusCode: 302,
+      headers: {
+        location: "/estacao-remota.html?origem=kali",
+        "cache-control": "no-store, max-age=0",
+        "referrer-policy": "no-referrer",
+        "x-content-type-options": "nosniff"
+      },
+      body: ""
+    };
   }
 
   let portal;

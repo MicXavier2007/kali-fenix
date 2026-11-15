@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1118">
+  <title>Estação remota | Kali Fenix</title>
+  <link rel="icon" href="assets/kali-fenix.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/kali-fenix.css">
+  <style>
+    .remote-empty-wrap{min-height:calc(100vh - 160px);display:grid;place-items:center;padding:64px 0}
+    .remote-empty-card{width:min(760px,100%);padding:clamp(24px,5vw,48px);border:1px solid var(--line,rgba(255,255,255,.12));border-radius:24px;background:var(--panel,rgba(17,27,39,.9));box-shadow:0 24px 80px rgba(0,0,0,.22)}
+    .remote-empty-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:16px;background:rgba(245,158,11,.12);color:#fbbf24;font-size:27px;margin-bottom:22px}
+    .remote-empty-card h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;margin:10px 0 16px}
+    .remote-empty-card p{color:var(--muted,#aab6c5);line-height:1.7}
+    .remote-actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0}
+    .remote-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:26px}
+    .remote-option{display:block;padding:17px;border:1px solid var(--line,rgba(255,255,255,.12));border-radius:16px;color:inherit;text-decoration:none;background:rgba(255,255,255,.025)}
+    .remote-option strong{display:block;margin-bottom:7px}.remote-option small{color:var(--muted,#aab6c5);line-height:1.5}
+    .remote-status{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(245,158,11,.1);color:#fbbf24;font-size:.82rem;font-weight:700}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Kali Fenix, início"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a>
+    <nav class="main-nav" aria-label="Navegação principal"><a href="index.html#catalogo">Catálogo</a><a href="index.html#inventario">Inventário</a><a href="fenix-shell.html">Fenix Shell</a><a href="fenix-linux.html">Fenix Linux</a><a href="fenix-browser-lab.html">Python WASM</a></nav>
+    <a class="header-cta" href="index.html">Voltar ao início ↗</a>
+  </div></header>
+  <main id="main" class="remote-empty-wrap"><section class="container remote-empty-card">
+    <div class="remote-empty-icon" aria-hidden="true">⌁</div>
+    <span class="remote-status"><span aria-hidden="true">●</span> Servidor remoto não configurado</span>
+    <h1>A estação Kali remota ainda não está disponível.</h1>
+    <p>O portal do Kali Fenix está publicado, mas uma estação Linux remota precisa de uma VPS ou máquina própria ligada à internet. Como não há servidor configurado, esta página informa o estado em vez de abrir um painel vazio ou apresentar um erro técnico.</p>
+    <p>Você ainda pode continuar usando os ambientes que não exigem uma VPS:</p>
+    <div class="remote-options">
+      <a class="remote-option" href="fenix-shell.html#local-engine"><strong>Fenix Shell local</strong><small>Conecta o site a um motor iniciado no seu próprio computador.</small></a>
+      <a class="remote-option" href="fenix-linux.html"><strong>Fenix Linux</strong><small>Abre o Linux minimalista emulado no navegador.</small></a>
+      <a class="remote-option" href="fenix-browser-lab.html"><strong>Python WebAssembly</strong><small>Executa código Python dentro do navegador.</small></a>
+    </div>
+    <div class="remote-actions"><a class="button button-primary" href="index.html">Voltar ao painel principal</a><a class="button button-secondary" href="index.html#implantacao">Ver requisitos da estação remota</a></div>
+  </section></main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="index.html"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Estado da infraestrutura remota do Kali Fenix.</p><span>© <span id="remote-year"></span> KALI FENIX</span></div></footer>
+  <script>document.getElementById('remote-year').textContent=String(new Date().getFullYear());</script>
+</body>
+</html>

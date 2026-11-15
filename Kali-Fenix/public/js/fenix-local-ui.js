@@ -43,9 +43,8 @@
       Authorization: `Bearer ${token}`,
       ...(options.body ? { 'Content-Type': 'application/json' } : {})
     };
-    const requestOptions = { ...options, mode: 'cors', cache: 'no-store', headers, targetAddressSpace: 'loopback' };
-    const localRequest = new Request(`${ENGINE_URL}${path}`, requestOptions);
-    const response = await fetch(localRequest);
+    const requestOptions = { ...options, mode: 'cors', cache: 'no-store', headers };
+    const response = await fetch(`${ENGINE_URL}${path}`, requestOptions);
     let payload;
     try { payload = await response.json(); }
     catch { throw new Error(`Resposta inválida do motor local (HTTP ${response.status}).`); }
