@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Fenix Linux: terminal Linux minimalista emulado no navegador, sem VPS e sem instalação local.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Fenix Linux — Terminal no navegador | Kali Fenix</title>
+  <link rel="icon" href="assets/kali-fenix.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/kali-fenix.css">
+  <link rel="stylesheet" href="css/fenix-linux.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Kali Fenix, início">
+        <span class="brand-mark" aria-hidden="true">KF</span>
+        <span class="brand-name">KALI <strong>FENIX</strong></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#catalogo">Catálogo</a>
+        <a href="index.html#labs">Labs</a>
+        <a href="fenix-shell.html">Fenix Shell</a>
+        <a href="fenix-browser-lab.html">Python WASM</a>
+      </nav>
+      <a class="header-cta" href="index.html">Voltar ao Kali Fenix ↗</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="linux-hero">
+      <div class="container linux-hero-inner">
+        <div>
+          <span class="section-kicker">FENIX LINUX / LINUX EMULADO + WEBASSEMBLY</span>
+          <h1>Um terminal Linux.<br><em>Dentro do navegador.</em></h1>
+          <p>Abra uma pequena máquina Linux virtual no próprio navegador, sem instalar uma distribuição no computador e sem manter uma VPS. O processamento acontece no seu dispositivo usando o emulador v86.</p>
+          <div class="linux-tags" aria-label="Características">
+            <span>SEM VPS PRÓPRIA</span>
+            <span>SEM INSTALAÇÃO LOCAL</span>
+            <span>LINUX 32 BITS</span>
+            <span>V86 + WEBASSEMBLY</span>
+          </div>
+          <div class="linux-hero-actions">
+            <a class="button button-primary" href="#linux-emulator">Abrir terminal ↓</a>
+            <a class="button button-secondary" href="https://copy.sh/v86/?profile=buildroot" target="_blank" rel="noopener noreferrer">Abrir em nova aba ↗</a>
+          </div>
+        </div>
+        <aside class="linux-summary" aria-label="Resumo do ambiente">
+          <div class="linux-summary-top"><span class="linux-lights"><i></i><i></i><i></i></span><span>FENIX / VIRTUAL LINUX</span><span class="linux-status">EMULADO</span></div>
+          <div class="linux-summary-body">
+            <p class="summary-muted">Ambiente selecionado</p>
+            <strong>Buildroot Linux</strong>
+            <div class="summary-specs">
+              <div><span>Arquitetura</span><b>x86 · 32 bits</b></div>
+              <div><span>Emulador</span><b>v86 / WebAssembly</b></div>
+              <div><span>Imagem base</span><b>aprox. 4,9 MB</b></div>
+              <div><span>Servidor próprio</span><b>Não necessário</b></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="linux-workspace section" id="linux-emulator">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">01 / SESSÃO LINUX</span><h2>Inicie sua máquina virtual.</h2></div>
+          <p>O perfil Buildroot já vem selecionado pelo emulador. Dentro do painel, pressione <strong>Start Emulation</strong> para iniciar. Depois clique na tela do sistema para enviar comandos pelo teclado.</p>
+        </div>
+
+        <div class="linux-launch-bar">
+          <div class="linux-launch-copy">
+            <span class="linux-launch-dot" aria-hidden="true"></span>
+            <div><strong>Emulador v86 — Buildroot Linux</strong><small>Serviço de emulação externo; o sistema convidado roda no navegador.</small></div>
+          </div>
+          <a class="button button-secondary button-small" href="https://copy.sh/v86/?profile=buildroot" target="_blank" rel="noopener noreferrer">Abrir em tela separada ↗</a>
+        </div>
+
+        <div class="linux-frame-shell">
+          <iframe
+            class="linux-emulator-frame"
+            src="https://copy.sh/v86/?profile=buildroot"
+            title="Emulador v86 com Buildroot Linux"
+            loading="eager"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="fullscreen"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="linux-frame-help">O emulador é carregado de copy.sh. Caso o navegador impeça a exibição incorporada, use o botão “Abrir em tela separada”. A primeira inicialização depende de conexão com a internet.</p>
+      </div>
+    </section>
+
+    <section class="section linux-details-section">
+      <div class="container linux-details-grid">
+        <div>
+          <span class="section-kicker">02 / O QUE VOCÊ PODE FAZER</span>
+          <h2>Um Linux leve para praticar.</h2>
+          <p>O perfil Buildroot é um sistema Linux minimalista pensado para demonstração e aprendizagem de terminal. Ele inclui um shell BusyBox e utilitários básicos; a lista publicada pelo projeto v86 também menciona Lua, ping, curl e telnet.</p>
+          <div class="linux-tool-tags"><code>ls</code><code>cd</code><code>pwd</code><code>mkdir</code><code>cat</code><code>echo</code><code>ping</code><code>curl</code><code>lua</code></div>
+        </div>
+        <div class="linux-limit-card">
+          <h3>Limites deste ambiente</h3>
+          <ul>
+            <li>Não é Kali Linux nem substitui uma instalação Kali completa.</li>
+            <li>Não inclui APT, systemd ou o catálogo de ferramentas do Kali.</li>
+            <li>O v86 emula x86 de 32 bits; kernels de 64 bits e múltiplos núcleos não são suportados.</li>
+            <li>A velocidade depende do processador, da memória e do navegador do seu computador.</li>
+            <li>O ambiente é temporário. Não considere seus arquivos persistentes após encerrar ou reiniciar a emulação.</li>
+            <li>A disponibilidade depende do site externo copy.sh e dos arquivos servidos por ele.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section linux-next-section">
+      <div class="container">
+        <div class="section-heading"><div><span class="section-kicker">03 / OUTROS AMBIENTES FENIX</span><h2>Continue trabalhando.</h2></div><p>Cada página tem uma função diferente. Use o ambiente adequado para o que deseja executar.</p></div>
+        <div class="linux-next-grid">
+          <a class="linux-next-card" href="fenix-shell.html"><span>01 / MOTOR LOCAL</span><strong>Fenix Shell</strong><small>Conecta o site a um serviço controlado iniciado no seu computador.</small><b>Abrir Fenix Shell ↗</b></a>
+          <a class="linux-next-card" href="fenix-browser-lab.html"><span>02 / PYTHON WASM</span><strong>Fenix Browser Lab</strong><small>Escreva e execute Python diretamente no navegador.</small><b>Abrir laboratório ↗</b></a>
+          <a class="linux-next-card" href="index.html#labs"><span>03 / TREINAMENTO</span><strong>Fenix Labs</strong><small>Continue em plataformas de treinamento e laboratórios externos.</small><b>Ver laboratórios ↗</b></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="index.html"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a>
+      <p>Fenix Linux · terminal Linux minimalista emulado no navegador.</p>
+      <span>© <span id="linux-year"></span> KALI FENIX</span>
+    </div>
+  </footer>
+  <script>document.getElementById('linux-year').textContent = String(new Date().getFullYear());</script>
+</body>
+</html>

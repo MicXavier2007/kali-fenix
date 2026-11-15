@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Fenix Shell: terminal open source para ambientes locais, Kali Live USB, VPS e laboratórios remotos.">
+  <title>Fenix Shell — Kali Fenix</title>
+  <link rel="icon" href="assets/kali-fenix.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/kali-fenix.css">
+  <link rel="stylesheet" href="css/fenix-shell.css">
+  <script defer src="js/fenix-shell.js"></script>
+  <script defer src="js/fenix-local-ui.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Kali Fenix, início"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a>
+    <nav class="main-nav" aria-label="Navegação principal"><a href="index.html#catalogo">Catálogo</a><a href="index.html#labs">Labs</a><a href="#local-engine">Local Engine</a><a href="fenix-browser-lab.html">Python WASM</a><a href="fenix-linux.html">Fenix Linux</a></nav>
+    <a class="header-cta" href="index.html">Voltar ao Kali Fenix ↗</a>
+  </div></header>
+  <main id="main">
+    <section class="shell-hero"><div class="container shell-hero-grid">
+      <div><span class="section-kicker">FENIX SHELL / OPEN SOURCE</span><h1>Um terminal.<br><em>Seu ambiente.</em></h1>
+        <p>Use o motor local no seu próprio computador para comandos de diagnóstico controlados ou abra um ambiente Python WebAssembly que roda inteiramente no navegador. Assim, você pode continuar evoluindo o Kali Fenix sem manter uma VPS ligada.</p>
+        <div class="shell-hero-actions"><a class="button button-primary" href="#local-engine">Conectar motor local ↓</a><a class="button button-secondary" href="fenix-browser-lab.html">Abrir Python no navegador ↗</a><a class="button button-secondary" href="fenix-linux.html">Abrir Fenix Linux ↗</a><a class="button button-secondary" href="#destino">Outros destinos</a></div>
+      </div>
+      <aside class="shell-preview"><div class="terminal-bar"><span class="terminal-lights"><i></i><i></i><i></i></span><span>FENIX SHELL / PREVIEW</span><span class="terminal-live">OPEN SOURCE</span></div><div class="shell-preview-body"><p><span class="prompt">fenix@local</span>:<span class="path">~</span>$ ttyd --version</p><p class="terminal-output">ttyd — terminal over websocket</p><p><span class="prompt">fenix@local</span>:<span class="path">~</span>$ echo "Seu ambiente, suas escolhas"</p><p class="terminal-output">Seu ambiente, suas escolhas</p><p><span class="prompt">fenix@local</span>:<span class="path">~</span>$ <span class="cursor"></span></p></div><div class="terminal-footer"><span>SEM TERMINAL FALSO</span><span>EXECUÇÃO NO DESTINO ESCOLHIDO</span></div></aside>
+    </div></section>
+
+    <section class="section shell-choice-section" id="destino"><div class="container">
+      <div class="section-heading"><div><span class="section-kicker">01 / OUTROS DESTINOS</span><h2>Onde instalar o shell?</h2></div><p>Selecione o ambiente para ver os requisitos, os comandos correspondentes e a forma de acesso.</p></div>
+      <div class="shell-target-layout">
+        <div class="target-picker"><label for="shell-target">Destino de instalação</label><select id="shell-target">
+          <option value="windows">Computador local — Windows</option>
+          <option value="linux">Computador local — Linux / Kali</option>
+          <option value="usb">Pendrive — Kali Live com persistência</option>
+          <option value="vps">VPS — Kali / Debian / Ubuntu</option>
+          <option value="cloud">Laboratório temporário — Cloud Shell</option>
+        </select>
+        <div class="target-note"><strong>O que é o ttyd?</strong><p>É um projeto open source (MIT) que publica um terminal no navegador usando WebSockets. O processo roda na máquina escolhida; a página do Kali Fenix não executa comandos por conta própria.</p><a href="https://github.com/tsl0922/ttyd" target="_blank" rel="noopener noreferrer">Ver repositório e licença ↗</a></div>
+        </div>
+        <article class="target-instructions" aria-live="polite">
+          <div class="target-heading"><span id="target-kicker">LOCAL / WINDOWS</span><span class="target-status" id="target-status">Instalação local</span></div>
+          <h3 id="target-title">Windows — PowerShell local</h3>
+          <p id="target-description">Instale o ttyd no Windows. O terminal será executado com as permissões da sua conta atual, sem elevação automática.</p>
+          <div class="requirement-list" id="target-requirements"></div>
+          <div class="command-block"><div class="command-title"><span>COMANDOS</span><button class="button button-secondary button-small" id="copy-shell-command" type="button">Copiar comandos</button></div><pre><code id="target-commands"></code></pre></div>
+          <div class="target-actions"><a class="button button-primary" id="target-open" href="http://127.0.0.1:7681" target="_blank" rel="noopener noreferrer">Abrir terminal local ↗</a><a class="button button-secondary" id="target-download" href="#" download hidden>Baixar instalador ↓</a><a class="button button-secondary" id="target-guide" href="https://github.com/tsl0922/ttyd" target="_blank" rel="noopener noreferrer">Documentação ↗</a></div>
+          <p class="target-footnote" id="target-footnote">Depois de iniciar o ttyd, abra o endereço local no mesmo computador.</p>
+        </article>
+      </div>
+    </div></section>
+
+    <section class="section shell-engine-section" id="local-engine">
+      <div class="container">
+        <div class="section-heading"><div><span class="section-kicker">02 / OPÇÃO A — EXECUÇÃO LOCAL</span><h2>Conecte seu próprio computador.</h2></div><p>O Fenix Local Engine é um pequeno serviço Python que roda no seu dispositivo. Não precisa de VPS, Docker ou npm; requer Python 3.10+ instalado.</p></div>
+        <div class="engine-layout">
+          <article class="engine-panel engine-setup-panel">
+            <div class="engine-panel-heading"><span class="engine-symbol">A</span><div><strong>Fenix Local Engine</strong><small>127.0.0.1 · porta 8765 · somente acesso local</small></div></div>
+            <p class="engine-explainer">Baixe o pacote, extraia e inicie o motor. A janela do terminal mostrará um token individual. Cole esse token abaixo para autorizar a conexão desta página.</p>
+            <a class="button button-primary button-wide" href="/installers/fenix-local-engine.zip" download>Baixar Fenix Local Engine ↓</a>
+            <label class="engine-label" for="engine-token">Token exibido no terminal local</label>
+            <div class="engine-token-row"><input id="engine-token" type="password" autocomplete="off" spellcheck="false" placeholder="Cole seu token local aqui"><button class="button button-secondary" id="engine-connect" type="button">Conectar</button></div>
+            <div class="engine-status" id="engine-status" role="status" aria-live="polite" data-state="idle">Motor local desconectado. Inicie-o antes de conectar.</div>
+            <div class="engine-requirements"><strong>Requisitos</strong><span>Python 3.10 ou superior</span><span>Chrome / Edge atualizado</span><span>Permissão de acesso à rede local, quando solicitada</span></div>
+            <p class="engine-security-note">O token fica apenas na memória desta página e não é salvo no navegador. O motor aceita somente comandos permitidos e limita os arquivos à pasta <code>KaliFenixWorkspace</code>.</p>
+          </article>
+          <article class="engine-panel engine-terminal-panel">
+            <div class="engine-terminal-top"><div><span class="terminal-lights"><i></i><i></i><i></i></span><strong>FENIX LOCAL TERMINAL</strong></div><span id="engine-version" data-state="offline">DESCONECTADO</span></div>
+            <div class="engine-terminal-output" id="engine-terminal-output" aria-live="polite" aria-label="Saída do terminal"><div class="engine-line engine-line-info">[Fenix Local Engine aguardando conexão]</div><div class="engine-line engine-line-info">Comandos iniciais: help, pwd, ls, whoami, uname</div></div>
+            <div class="engine-shortcuts" aria-label="Comandos rápidos"><button type="button" data-engine-command="pwd">pwd</button><button type="button" data-engine-command="ls">ls</button><button type="button" data-engine-command="whoami">whoami</button><button type="button" data-engine-command="uname">uname</button><button type="button" data-engine-command="python --version">python --version</button></div>
+            <form class="engine-command-form" id="engine-command-form"><label class="visually-hidden" for="engine-command-input">Comando local</label><span aria-hidden="true">$</span><input id="engine-command-input" type="text" autocomplete="off" spellcheck="false" placeholder="Conecte e digite help…" disabled><button class="button button-primary" id="engine-run" type="submit" disabled>Executar</button></form>
+            <p class="engine-terminal-note">Este terminal executa comandos reais, mas não é um Bash/PowerShell irrestrito. Não oferece sudo, APT, comandos arbitrários nem acesso fora do workspace.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell-browser-section" id="browser-python">
+      <div class="container">
+        <div class="section-heading"><div><span class="section-kicker">03 / OPÇÃO B — WEBASSEMBLY</span><h2>Python sem instalar nada.</h2></div><p>Um interpretador Python executado no navegador usando Pyodide e WebAssembly. Não usa sua VPS nem consome os 5 GB do Cloud Shell.</p></div>
+        <div class="browser-lab-card">
+          <div class="browser-lab-icon">{ }</div>
+          <div class="browser-lab-copy"><strong>Fenix Browser Lab</strong><span>Console Python persistente na sessão, editor multilinha, exemplos, saída e download do arquivo .py.</span><small>O runtime é carregado sob demanda pelo CDN oficial do Pyodide; a primeira abertura precisa de internet e pode demorar mais.</small></div>
+          <a class="button button-primary" href="fenix-browser-lab.html">Abrir laboratório Python ↗</a>
+        </div>
+        <p class="engine-security-note">Limite: o Python WebAssembly não é Kali Linux. Ele não executa comandos do sistema operacional, APT, Nmap, Wireshark ou acesso direto ao hardware e à rede local.</p>
+      </div>
+    </section>
+
+    <section class="section shell-connect-section"><div class="container"><div class="section-heading"><div><span class="section-kicker">04 / TERMINAL REMOTO</span><h2>Conectar ao Fenix Shell.</h2></div><p>Quando houver um serviço remoto instalado e protegido, configure o endereço HTTPS no Netlify e use o botão abaixo.</p></div>
+      <div class="remote-panel"><div><span class="status-indicator"></span><div><strong>Portal remoto ainda não configurado</strong><small>Necessita ttyd atrás de proxy autenticado ou gateway seguro.</small></div></div><a class="button button-primary" href="/.netlify/functions/fenix-shell-portal">Conectar ao shell remoto ↗</a><p>Configure <code>FENIX_SHELL_PORTAL_URL</code> como URL HTTPS de um terminal protegido por autenticação forte, MFA e proxy reverso. Não exponha a porta 7681 diretamente à internet.</p></div>
+    </div></section>
+
+    <section class="section shell-safety-section"><div class="container shell-safety-grid">
+      <div><span class="section-kicker">05 / SEGURANÇA E LIMITES DO NAVEGADOR</span><h2>O navegador não instala sistemas operacionais.</h2><p>O Kali Fenix é o painel de escolha e documentação. A instalação é realizada no destino que você selecionar, com permissão administrativa nesse dispositivo ou servidor.</p></div>
+      <div class="shell-safety-list"><div><strong>Computador local</strong><span>Você executa o instalador no Windows, Linux ou Kali. O shell abre em localhost.</span></div><div><strong>Pendrive Kali Live</strong><span>É necessário criar a mídia inicializável em outra ferramenta. A gravação apaga o pendrive; persistência exige particionamento adicional.</span></div><div><strong>VPS</strong><span>O serviço fica ligado à interface local e só é acessado via túnel SSH ou proxy reverso autenticado.</span></div><div><strong>Cloud Shell</strong><span>É um ambiente de desenvolvimento temporário, não substitui uma VPS nem deve ser usado para varredura de rede.</span></div></div>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="index.html"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Fenix Shell · terminal open source em ambientes escolhidos por você.</p><span>© <span id="shell-year"></span> KALI FENIX</span></div></footer>
+</body>
+</html>

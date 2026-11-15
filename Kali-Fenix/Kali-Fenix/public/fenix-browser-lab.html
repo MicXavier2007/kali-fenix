@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Fenix Browser Lab: ambiente Python WebAssembly executado diretamente no navegador, sem VPS.">
+  <title>Fenix Browser Lab — Kali Fenix</title>
+  <link rel="icon" href="assets/kali-fenix.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/kali-fenix.css">
+  <link rel="stylesheet" href="css/fenix-shell.css">
+  <link rel="stylesheet" href="css/fenix-browser-lab.css">
+  <script defer src="js/fenix-browser-lab.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Kali Fenix, início"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a>
+    <nav class="main-nav" aria-label="Navegação principal"><a href="index.html#catalogo">Catálogo</a><a href="index.html#labs">Labs</a><a href="fenix-shell.html#local-engine">Local Engine</a><a href="fenix-linux.html">Fenix Linux</a></nav>
+    <a class="header-cta" href="fenix-linux.html">Abrir Fenix Linux ↗</a>
+  </div></header>
+  <main id="main">
+    <section class="browser-hero"><div class="container browser-hero-inner">
+      <span class="section-kicker">FENIX BROWSER LAB / PYTHON + WEBASSEMBLY</span>
+      <h1>Python.<br><em>Direto no navegador.</em></h1>
+      <p>Execute código Python usando Pyodide, uma distribuição Python compilada para WebAssembly. O código roda no seu navegador, em uma sessão isolada, sem VPS e sem instalar Python no computador.</p>
+      <div class="browser-hero-tags"><span>SEM VPS</span><span>SEM NPM</span><span>WEBASSEMBLY</span><span>SESSÃO LOCAL AO NAVEGADOR</span></div>
+    </div></section>
+
+    <section class="section browser-workspace"><div class="container">
+      <div class="section-heading"><div><span class="section-kicker">01 / EDITOR E EXECUÇÃO</span><h2>Seu laboratório Python.</h2></div><p>O runtime é baixado sob demanda do CDN oficial. Depois de carregado, várias instruções podem ser executadas na mesma sessão Python.</p></div>
+      <div class="python-status-row"><div id="python-status" role="status" aria-live="polite" data-state="loading">Preparando o runtime Python…</div><span id="python-version" data-state="loading">CARREGANDO</span></div>
+      <div class="python-workspace">
+        <section class="python-editor-panel" aria-label="Editor Python">
+          <div class="python-panel-top"><span>EDITOR / main.py</span><span>CTRL + ENTER PARA EXECUTAR</span></div>
+          <div class="python-examples">
+            <button type="button" data-python-example="print('Olá, Kali Fenix!')">Olá, mundo</button>
+            <button type="button" data-python-example="2 + 2\n">Cálculo</button>
+            <button type="button" data-python-example="import math\nprint(math.sqrt(144))\nprint(math.pi)\n">Biblioteca padrão</button>
+            <button type="button" data-python-example="for numero in range(1, 6):\n    print(f'Etapa {numero}')\n">Laço for</button>
+          </div>
+          <label class="visually-hidden" for="python-editor">Código Python</label>
+          <textarea id="python-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off">print("Olá! Este é o Fenix Browser Lab.")
+print("Python está rodando dentro do navegador.")
+
+for etapa in range(1, 4):
+    print(f"Laboratório iniciado: etapa {etapa}")</textarea>
+          <div class="python-editor-actions"><button class="button button-secondary" id="python-download" type="button">Baixar .py ↓</button><button class="button button-secondary" id="python-restart" type="button">Reiniciar runtime</button><button class="button button-primary" id="python-run" type="button" disabled>Executar código ▶</button></div>
+        </section>
+        <section class="python-output-panel" aria-label="Saída Python">
+          <div class="python-panel-top"><span>CONSOLE / OUTPUT</span><button id="python-clear" type="button">Limpar saída</button></div>
+          <div id="python-output" class="python-output" aria-live="polite"><div class="python-line python-line-system">[Aguardando o runtime Python WebAssembly]</div></div>
+        </section>
+      </div>
+    </div></section>
+
+    <section class="section browser-limit-section"><div class="container browser-limits-grid">
+      <div><span class="section-kicker">02 / O QUE ESTE AMBIENTE FAZ</span><h2>Python real, com limites de navegador.</h2><p>Não é uma VM Kali e não substitui uma máquina Linux. É ideal para aprender Python, testar lógica, trabalhar com texto, listas, dicionários, JSON e bibliotecas que tenham suporte ao Pyodide.</p></div>
+      <div class="browser-limit-list">
+        <div><strong><span>✓</span> Funciona sem servidor próprio</strong><small>O processamento ocorre no navegador do usuário.</small></div>
+        <div><strong><span>✓</span> Biblioteca padrão Python</strong><small>Disponibiliza módulos como math, json, re, datetime e statistics.</small></div>
+        <div><strong><span>×</span> Não é terminal Linux</strong><small>Não executa bash, PowerShell, sudo, apt, Nmap ou ferramentas Kali.</small></div>
+        <div><strong><span>×</span> Sem acesso irrestrito ao computador</strong><small>O ambiente WebAssembly não acessa livremente o disco, processos ou interfaces de rede do sistema.</small></div>
+      </div>
+    </div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><a class="brand" href="index.html"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Fenix Browser Lab · Python executado com WebAssembly.</p><span>© <span id="browser-year"></span> KALI FENIX</span></div></footer>
+  <script>document.getElementById('browser-year').textContent = String(new Date().getFullYear());</script>
+</body>
+</html>
