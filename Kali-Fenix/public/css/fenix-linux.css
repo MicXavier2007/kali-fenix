@@ -1,0 +1,30 @@
+.linux-hero{padding:66px 0 52px;border-bottom:1px solid rgba(120,164,204,.12);background:radial-gradient(ellipse at 80% 0,rgba(50,160,117,.14),transparent 45%)}
+.linux-hero-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.linux-hero-inner h1{margin:18px 0 19px;font-size:clamp(42px,6vw,68px);line-height:.99;letter-spacing:-.065em}
+.linux-hero-inner h1 em{color:#73d7ad;font-style:normal}
+.linux-hero-inner>div>p{max-width:680px;color:#b4c5d7;font-size:14px;line-height:1.85}
+.linux-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:19px}
+.linux-tags span{padding:5px 8px;border:1px solid rgba(89,185,143,.27);border-radius:99px;color:#9bdfc0;background:rgba(69,171,122,.045);font:8px ui-monospace,monospace;letter-spacing:.1em}
+.linux-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:23px}
+.linux-summary{overflow:hidden;border:1px solid rgba(86,171,132,.36);border-radius:15px;background:linear-gradient(145deg,rgba(16,42,42,.94),rgba(7,19,30,.98));box-shadow:var(--shadow)}
+.linux-summary-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;border-bottom:1px solid rgba(98,164,139,.18);color:#89acaa;font:9px ui-monospace,monospace;letter-spacing:.1em}
+.linux-lights{display:flex;gap:5px}.linux-lights i{width:7px;height:7px;border-radius:50%;background:#3b7968}.linux-lights i:first-child{background:#56c991}.linux-status{color:#81dfb2}
+.linux-summary-body{padding:21px}.summary-muted{margin:0 0 4px;color:#7f9f9e;font-size:10px}.linux-summary-body>strong{font-size:22px;letter-spacing:-.03em}.summary-specs{margin-top:15px;border-top:1px solid rgba(98,164,139,.18)}.summary-specs div{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid rgba(98,164,139,.12);font-size:10px}.summary-specs span{color:#85a3a2}.summary-specs b{color:#dbebe6;text-align:right;font-weight:700}
+.linux-workspace{padding-top:55px}
+.linux-launch-bar{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:13px 16px;border:1px solid #25445b;border-bottom:0;border-radius:13px 13px 0 0;background:linear-gradient(145deg,rgba(15,33,52,.97),rgba(9,23,38,.98))}
+.linux-launch-copy{display:flex;align-items:center;gap:11px;min-width:0}.linux-launch-dot{width:9px;height:9px;flex:none;border-radius:50%;background:#5dce9d;box-shadow:0 0 0 5px rgba(75,209,155,.1)}.linux-launch-copy strong,.linux-launch-copy small{display:block}.linux-launch-copy strong{font-size:12px}.linux-launch-copy small{margin-top:3px;color:#8da6bd;font-size:9px}
+.linux-frame-shell{overflow:hidden;border:1px solid #25445b;border-radius:0 0 13px 13px;background:#070d15;box-shadow:var(--shadow)}
+.linux-emulator-frame{display:block;width:100%;height:980px;border:0;background:#fff}
+.linux-frame-help{margin:10px 2px 0;color:#859db4;font-size:10px;line-height:1.7}
+.linux-details-section{padding-top:42px;background:linear-gradient(180deg,rgba(14,39,63,.14),transparent)}
+.linux-details-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:34px;align-items:start}
+.linux-details-grid h2{margin:12px 0;font-size:clamp(28px,4vw,39px);line-height:1.08;letter-spacing:-.045em}
+.linux-details-grid>div:first-child>p{color:#9eb1c5;font-size:12px;line-height:1.8}
+.linux-tool-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.linux-tool-tags code{padding:6px 9px;border:1px solid rgba(91,177,137,.22);border-radius:7px;background:rgba(69,171,122,.06);color:#9de0bd;font:10px ui-monospace,monospace}
+.linux-limit-card{padding:20px 22px;border:1px solid rgba(214,163,77,.24);border-radius:13px;background:linear-gradient(145deg,rgba(36,31,22,.34),rgba(9,23,38,.92))}
+.linux-limit-card h3{margin:0 0 11px;font-size:15px}.linux-limit-card ul{margin:0;padding-left:19px;color:#aebdca;font-size:11px;line-height:1.8}.linux-limit-card li{padding-left:4px;margin:5px 0}
+.linux-next-section{padding-top:35px}.linux-next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.linux-next-card{display:flex;flex-direction:column;min-height:170px;padding:18px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,rgba(15,33,52,.95),rgba(9,23,38,.98));text-decoration:none;transition:border-color .18s,transform .18s}
+.linux-next-card:hover{transform:translateY(-2px);border-color:#4986ae}.linux-next-card>span{color:#78c4a3;font-size:8px;font-weight:900;letter-spacing:.13em}.linux-next-card strong{margin-top:10px;font-size:16px}.linux-next-card small{flex:1;margin-top:5px;color:#9eb1c5;font-size:10px;line-height:1.65}.linux-next-card b{margin-top:12px;color:#8bd6b1;font-size:10px}
+@media(max-width:850px){.linux-hero-inner,.linux-details-grid{grid-template-columns:1fr}.linux-summary{max-width:600px}.linux-emulator-frame{height:950px}}
+@media(max-width:620px){.linux-hero{padding:48px 0 38px}.linux-hero-inner{gap:28px}.linux-hero-actions{flex-direction:column;align-items:stretch}.linux-launch-bar{align-items:flex-start;flex-direction:column}.linux-launch-bar .button{width:100%}.linux-emulator-frame{height:1050px}.linux-next-grid{grid-template-columns:1fr}.linux-details-grid{gap:22px}.linux-limit-card{padding:16px}}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Kali Fenix: catálogo oficial de ferramentas Kali Linux e acesso à estação Kali remota pelo navegador.">
+  <meta name="description" content="Kali Fenix: catálogo de ferramentas, terminal Linux emulado, motor local e laboratório Python WebAssembly no navegador.">
   <meta name="theme-color" content="#07111f">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -26,6 +26,8 @@
         <a href="#labs">Labs</a>
         <a href="#estacao">Estação remota</a>
         <a href="fenix-shell.html">Fenix Shell</a>
+        <a href="fenix-browser-lab.html">Python WASM</a>
+        <a href="fenix-linux.html">Fenix Linux</a>
       </nav>
       <a class="header-cta" href="/.netlify/functions/kali-portal">Abrir Kali <span aria-hidden="true">↗</span></a>
     </div>
@@ -37,11 +39,13 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="pulse-dot"></span> KALI LINUX / REMOTE WORKSTATION</div>
           <h1>Seu Kali.<br><em>No navegador.</em></h1>
-          <p class="hero-description">Consulte o catálogo oficial do Kali Linux e acesse uma estação Kali remota pelo navegador. O computador local funciona como cliente; a execução das ferramentas acontece no servidor configurado.</p>
+          <p class="hero-description">Consulte o catálogo do Kali Linux, conecte um motor local controlado ou execute Python no navegador sem VPS. A estação Kali remota continua disponível como integração opcional quando houver servidor configurado.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#catalogo">Explorar ferramentas <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="#estacao">Conhecer a estação</a>
             <a class="button button-secondary" href="fenix-shell.html">Abrir Fenix Shell ↗</a>
+            <a class="button button-secondary" href="fenix-browser-lab.html">Python no navegador ↗</a>
+            <a class="button button-secondary" href="fenix-linux.html">Terminal Linux ↗</a>
           </div>
           <div class="hero-note"><span aria-hidden="true">✓</span> Sem instalar Kali no notebook local</div>
         </div>
@@ -196,7 +200,7 @@
               <a href="https://www.kali.org/docs/general-use/metapackages/" target="_blank" rel="noopener noreferrer">Metapacotes oficiais Kali ↗</a>
               <a href="https://guacamole.apache.org/doc/gug/" target="_blank" rel="noopener noreferrer">Documentação Apache Guacamole ↗</a>
               <a href="FENIX-KALI-BROWSER-SETUP.md">Guia de implantação ↗</a>
-              <a href="services/kali-workstation/README.md">Instalador da estação ↗</a>
+              <a href="services/kali-workstation/README.md">Especificação da estação ↗</a>
             </div>
           </article>
         </div>
@@ -218,7 +222,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Catálogo oficial, inventário, laboratórios e Fenix Shell.</p><span>© <span id="current-year"></span> KALI FENIX</span></div>
+    <div class="container footer-inner"><a class="brand" href="#top"><span class="brand-mark">KF</span><span class="brand-name">KALI <strong>FENIX</strong></span></a><p>Catálogo, inventário, laboratórios, Fenix Shell, Fenix Linux e Python WebAssembly.</p><span>© <span id="current-year"></span> KALI FENIX</span></div>
   </footer>
 </body>
 </html>

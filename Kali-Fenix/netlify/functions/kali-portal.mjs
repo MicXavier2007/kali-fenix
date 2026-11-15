@@ -9,11 +9,15 @@ const json = (statusCode, payload) => ({
 });
 
 export async function handler(event) {
+  if (event.httpMethod !== "GET") {
+    return json(405, { error: "Método não permitido." });
+  }
+
   const raw = process.env.FENIX_KALI_PORTAL_URL;
   if (!raw) {
     return json(503, {
-      error: "Kali portal não configurado.",
-      instruction: "Defina FENIX_KALI_PORTAL_URL no ambiente do Netlify com a URL HTTPS do portal Apache Guacamole."
+      error: "Estação Kali remota ainda não configurada.",
+      instruction: "Configure FENIX_KALI_PORTAL_URL com a URL HTTPS de um portal Apache Guacamole protegido por autenticação forte e MFA."
     });
   }
 
@@ -25,11 +29,9 @@ export async function handler(event) {
   }
 
   if (portal.protocol !== "https:" || portal.username || portal.password) {
-    return json(500, { error: "O portal deve usar HTTPS e não pode conter credenciais embutidas na URL." });
-  }
-
-  if (event.httpMethod !== "GET") {
-    return json(405, { error: "Método não permitido." });
+    return json(500, {
+      error: "O portal deve usar HTTPS e não pode conter credenciais embutidas na URL."
+    });
   }
 
   return {
